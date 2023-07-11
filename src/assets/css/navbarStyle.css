@@ -1,0 +1,54 @@
+.rounded-pill {
+  width: 100px;
+}
+#home-nav {
+  background: #ffffff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+}
+#searchbox {
+  border-radius: 25px;
+  width: 500px;
+  padding-right: 40px;
+}
+.searchLogo {
+  margin-left: -40px;
+  margin-right: 20px;
+}
+#homeFilter {
+  width: 42px;
+}
+a:link,
+a:visited {
+  text-decoration: none !important;
+  color: darkslategrey;
+  cursor: pointer !important;
+}
+@media screen and (max-width: 800px) {
+  #searchbox {
+    border-radius: 25px;
+    width: 400px;
+  }
+  .category {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #homeFilter {
+    width: 40px;
+  }
+  #nav-content {
+    height: 58vh;
+    width: 50vh;
+  }
+}
+@media screen and (max-width: 500px) {
+  #searchbox {
+    border-radius: 25px;
+    width: 250px;
+  }
+  .searchLogo {
+    margin-left: -30px;
+  }
+}
