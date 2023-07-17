@@ -20,18 +20,18 @@ This README is a guide for a web application built using React JS as the main li
 <table>
 <tr>
 <td><image src="./Screen Capture/Home.png" alt="Home page" width=100%/></td>
-<td><image src="./Screen Capture/HomeMobile.png" alt="Home page" width=100%/></td>
+<td><image src="./Screen Capture/DetailProduct.png" alt="Detail page" width=100%/></td>
 </tr>
 <tr>
 <td align='center'>Home</td>
-<td align='center'>Home - Mobile Display</td>
+<td align='center'>Detail</td>
 </tr>
 <tr>
-<td><image src="./Screen Capture/DetailProduct.png" alt="Detail page" width=100%/></td>
+<td><image src="./Screen Capture/HomeMobile.png" alt="Home page" width=100%/></td>
 <td><image src="./Screen Capture/DetailProductMobile.png" alt="Detail page" width=100%/></td>
 </tr>
 <tr>
-<td align='center'>Detail</td>
+<td align='center'>Home - Mobile Display</td>
 <td align='center'>Detail - Mobile Display</td>
 </tr>
 </table>
