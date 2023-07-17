@@ -1,3 +1,65 @@
+<div align="center">
+<br/>
+<img src="https://i.postimg.cc/52xG205r/blanja.png" width="180px" height="70px" cover />
+ </div>
+
+<div align="center">
+<br />
+
+[![made by Yusuf Setiawan](https://img.shields.io/badge/made%20by-Yusuf-ff1414.svg?style=flat-square)](https://github.com/YuSetiawan)
+
+</div>
+
+# Blanja
+
+React Redux Toolkit Web Application with Tailwind CSS
+This README is a guide for a web application built using React JS as the main library, Redux Toolkit as the state management, and Tailwind CSS as the UI framework. This application aims to provide optimal user experience in utilizing the provided features.
+
+## Screenshot
+
+<table>
+<tr>
+<td><image src="./Screen Capture/Home.png" alt="Home page" width=100%/></td>
+<td><image src="./Screen Capture/HomeMobile.png" alt="Home page" width=100%/></td>
+</tr>
+<tr>
+<td align='center'>Home</td>
+<td align='center'>Home - Mobile Display</td>
+</tr>
+<tr>
+<td><image src="./Screen Capture/DetailProduct.png" alt="Detail page" width=100%/></td>
+<td><image src="./Screen Capture/DetailProductMobile.png" alt="Detail page" width=100%/></td>
+</tr>
+<tr>
+<td align='center'>Detail</td>
+<td align='center'>Detail - Mobile Display</td>
+</tr>
+</table>
+
+## Requirements
+
+Before running this application, make sure that the system used meets the following requirements: the latest version of Node.js, React JS, and Redux Toolkit are installed, and a code editor such as Visual Studio Code is available.
+
+## Installation
+
+Clone the project
+
+```bash
+  git clone https://github.com/YuSetiawan/Blanja_client.git
+```
+
+Install dependencies
+
+```bash
+  npm install or yarn install
+```
+
+Start the client
+
+```bash
+  npm start
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
