@@ -1,14 +1,14 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
 import ItemCart from '../components/cart/ItemCart';
 import CheckOut from '../components/cart/CheckOut';
+import NavbarLogin from '../components/navbar/NavbarLogin';
 
 const Cart = () => {
   return (
     <>
       {/* Navbar */}
       <header>
-        <Navbar />
+        <NavbarLogin />
       </header>
       <main>
         <section className="mt-5">

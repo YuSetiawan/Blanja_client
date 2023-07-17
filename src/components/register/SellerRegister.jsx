@@ -24,7 +24,9 @@ const SellerRegister = () => {
             <input className="form-control" placeholder="Password" type="password" />
           </div>
           <div className="form-group">
-            Forgot password?
+            <p className="float-right py-3 text-danger mb-0" href="#">
+              Forgot password?
+            </p>{' '}
             <button onClick={() => navigate('/home')} className="btn btn-danger btn-block rounded-pill">
               SIGN UP
             </button>

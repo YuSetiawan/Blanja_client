@@ -2,10 +2,10 @@ import React from 'react';
 
 const CustOrder = () => {
   return (
-    <div className="tab-pane fade ml-3" id="list-order" role="tabpanel" aria-labelledby="list-order-list">
-      <div className="card">
+    <div className="tab-pane fade ml-3 shadow" id="list-order" role="tabpanel" aria-labelledby="list-order-list">
+      <div className="card shadow">
         <div className="container">
-          <ul className="nav nav-pills d-flex justify-content-around pt-3 mb-3" id="pills-tab" role="tablist">
+          <ul className="nav nav-pills d-flex justify-content-between pt-3 mb-3" id="pills-tab" role="tablist">
             <li className="nav-item" role="presentation">
               <button className="nav-link btn btn-outline-danger active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
                 All items

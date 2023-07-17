@@ -28,9 +28,9 @@ const Navbar = () => {
                 </div>
               </div>
               <form className="form-inline my-2 my-lg-0 row justify-content-center">
-                <a href="/pages/cart.html">
+                <div onClick={() => navigate('/cart')}>
                   <img className="mr-4" src={Cart} alt="cart" />
-                </a>
+                </div>
                 <button onClick={() => navigate('/login')} className="btn btn-danger rounded-pill mr-2">
                   Login
                 </button>

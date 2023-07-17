@@ -3,9 +3,9 @@ import bigProfile from '../../assets/img/Big-profile.png';
 
 const CustProfile = () => {
   return (
-    <div className="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+    <div className="tab-pane fade show active " id="list-home" role="tabpanel" aria-labelledby="list-home-list">
       <div className="container ml-3">
-        <div className="card pl-3">
+        <div className="card pl-3 shadow">
           <div className="card-body">
             <div className="pt-3 border-bottom">
               <h3>My profile</h3>
@@ -134,7 +134,7 @@ const CustProfile = () => {
               </div>
               {/* Right Profile */}
               <div className="col-md-3 border-left">
-                <img className="pl-5 mb-3" src={bigProfile} alt="" />
+                <img className="pl-md-3 mb-3" src={bigProfile} alt="" />
                 <button type="button" className="btn btn-outline-secondary rounded-pill ml-5" style={{width: 'fit-content'}}>
                   Select image
                 </button>

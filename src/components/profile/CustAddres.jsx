@@ -3,7 +3,7 @@ import React from 'react';
 const CustAddres = () => {
   return (
     <div className="tab-pane fade" id="list-Shipping" role="tabpanel" aria-labelledby="list-Shipping-list">
-      <div className="card ml-3">
+      <div className="card ml-3 shadow">
         <div className="card-body">
           <div className="pt-3 border-bottom">
             <h3>Choose another address</h3>

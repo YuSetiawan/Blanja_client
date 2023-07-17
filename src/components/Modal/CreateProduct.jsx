@@ -1,9 +1,11 @@
-import axios from 'axios';
 import {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {useDispatch} from 'react-redux';
+import CreateProductAction from '../../config/redux/actions/CreateProductAction';
 
 function CreateProduct() {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,30 +32,7 @@ function CreateProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('stock', data.stock);
-    formData.append('price', data.price);
-    formData.append('photo', photo);
-    formData.append('description', data.description);
-
-    axios
-      .post('http://localhost:4000/products', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        alert('Product Created');
-        setShow(false);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-        setShow(false);
-      });
+    dispatch(CreateProductAction(data, photo, setShow));
   };
 
   return (
@@ -64,7 +43,7 @@ function CreateProduct() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title> Create Product</Modal.Title>
         </Modal.Header>
         <form onSubmit={handleSubmit}>
           <Modal.Body>

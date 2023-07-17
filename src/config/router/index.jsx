@@ -5,10 +5,10 @@ import Login from '../../pages/Login';
 import Register from '../../pages/Register';
 import Product from '../../pages/Product';
 import Detail from '../../pages/Detail';
-import DetailProduct from '../../pages/DetailProduct';
 import Cart from '../../pages/Cart';
 import Order from '../../pages/Order';
 import Profile from '../../pages/Profile';
+import ProfileSeller from '../../pages/ProfileSeller';
 import Page404 from '../../pages/Page404';
 import RequireAuth from '../../components/RequireAuth';
 
@@ -21,12 +21,40 @@ const Router = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/cart"
+            element={
+              <RequireAuth>
+                <Cart />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <RequireAuth>
+                <Order />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile/seller"
+            element={
+              <RequireAuth>
+                <ProfileSeller />
+              </RequireAuth>
+            }
+          />
           <Route path="/product/" element={<Product />} />
           <Route path="/product/:id" element={<Detail />} />
-          <Route path="/detail/:id" element={<DetailProduct />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

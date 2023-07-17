@@ -41,24 +41,24 @@ const MakeOrder = () => {
                   <div className="method">
                     <h5 className="col-md-12 mb-4">Payment Method</h5>
                     <div className="Gopay d-flex justify-content-between mb-5">
-                      <img className="col-md-3 col-3 p-1" src={gopay} alt="" />
-                      <h5 className="col-md-4">Gopay</h5>
+                      <img className="col-md-3 col-3 p-1 ml-3" src={gopay} alt="" />
+                      <h5 className="col-md-4 mr-5">Gopay</h5>
                       <label className="container-check col-md-1 col-2">
                         <input type="checkbox" defaultChecked="checked" />
                         <span className="checkmark" />
                       </label>
                     </div>
                     <div className="POS d-flex justify-content-between mb-5">
-                      <img className="col-md-3 col-3" src={pos} alt="" />
-                      <h5 className="col-md-4">Pos Indonesia</h5>
+                      <img className="col-md-3 col-3 ml-3" src={pos} alt="" />
+                      <h5 className="col-md-4 mr-5">Pos Indonesia</h5>
                       <label className="container-check col-md-1 col-2">
                         <input type="checkbox" defaultChecked="checked" />
                         <span className="checkmark" />
                       </label>
                     </div>
                     <div className="master d-flex justify-content-between mb-5">
-                      <img className="col-md-3 col-3" src={master} alt="" />
-                      <h5 className="col-md-4">Mastercard</h5>
+                      <img className="col-md-3 col-3 ml-3" src={master} alt="" />
+                      <h5 className="col-md-4 mr-5">Mastercard</h5>
                       <label className="container-check col-md-1 col-2">
                         <input type="checkbox" defaultChecked="checked" />
                         <span className="checkmark" />

@@ -10,7 +10,7 @@ const ItemOrder = () => {
           <h5 className="card-title">Andreas Jane</h5>
           <p className="card-text">Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181.</p>
           {/* Button trigger modal */}
-          <button className="btn border rounded-pill" data-toggle="modal" data-target="#addressModal">
+          <button className="btn border rounded-pill w-50" data-toggle="modal" data-target="#addressModal">
             Choose another address
           </button>
           <div className="modal fade" id="addressModal" tabIndex={-1} aria-labelledby="addressModal" aria-hidden="true">

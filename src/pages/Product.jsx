@@ -2,22 +2,27 @@ import React, {useEffect, useState} from 'react';
 import Navbar from '../components/navbar/Navbar';
 import CreateProduct from '../components/Modal/CreateProduct';
 import UpdateProduct from '../components/Modal/UpdateProduct';
-import axios from 'axios';
 import DeleteProduct from '../components/Modal/DeleteProduct';
 import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import GetProductAction from '../config/redux/actions/GetProductAction';
+import Pagination from '../components/pagination/pagination';
 
 const Product = () => {
-  let [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(2);
+
+  const {product} = useSelector((state) => state.product);
   useEffect(() => {
-    axios
-      .get(`http://localhost:4000/products`)
-      .then((res) => {
-        setProducts(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(GetProductAction());
   }, []);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = product.slice(firstPostIndex, lastPostIndex);
+
   return (
     <>
       <Navbar></Navbar>
@@ -37,7 +42,7 @@ const Product = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {currentPosts.map((product) => (
               <tr>
                 <th>{product.id}</th>
                 <td>{product.name}</td>
@@ -60,6 +65,9 @@ const Product = () => {
             ))}
           </tbody>
         </table>
+        <div className="row d-flex justify-content-center ">
+          <Pagination totalPosts={product.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+        </div>
       </div>
     </>
   );

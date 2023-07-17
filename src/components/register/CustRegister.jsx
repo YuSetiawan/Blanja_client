@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import swal from 'sweetalert';
 
 const CustRegister = () => {
   const navigate = useNavigate();
@@ -22,7 +23,13 @@ const CustRegister = () => {
     axios
       .post('http://localhost:4000/user/register', data)
       .then((res) => {
-        alert('succesful register');
+        swal({
+          title: 'Register Succesful',
+          text: 'You can login to your account!',
+          icon: 'Success',
+          button: 'Login Now!',
+        });
+        navigate('/login');
       })
       .catch((err) => {
         console.log(err.response);
@@ -43,7 +50,9 @@ const CustRegister = () => {
             <input name="password" className="form-control" placeholder="password" type="password" onChange={onChange} />
           </div>
           <div className="form-group">
-            Forgot password?
+            <p className="float-right py-3 text-danger mb-0" href="#">
+              Forgot password?
+            </p>{' '}
             <button onClick={onClick} className="btn btn-danger btn-block rounded-pill">
               SIGN UP
             </button>

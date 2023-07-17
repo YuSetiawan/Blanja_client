@@ -1,12 +1,15 @@
-import axios from 'axios';
 import {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {useDispatch} from 'react-redux';
+import updateProductAction from '../../config/redux/actions/updateProductAction';
 
 function UpdateProduct(id, name, stock, price, description) {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [photo, setPhoto] = useState(null);
   let [data, setData] = useState({
     name,
     stock,
@@ -22,39 +25,13 @@ function UpdateProduct(id, name, stock, price, description) {
     console.log(data);
   };
 
-  const [photo, setPhoto] = useState(null);
-
   const handleUpload = (e) => {
     setPhoto(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('stock', data.stock);
-    formData.append('price', data.price);
-    formData.append('photo', photo);
-    formData.append('description', data.description);
-
-    axios
-      .put(`http://localhost:4000/products/${id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-        handleClose();
-        alert('Product Updated');
-        setShow(false);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-        setShow(false);
-      });
+    dispatch(updateProductAction(data, id, photo, setShow));
   };
 
   return (
@@ -69,11 +46,11 @@ function UpdateProduct(id, name, stock, price, description) {
         </Modal.Header>
         <form onSubmit={handleSubmit}>
           <Modal.Body>
-            <input className="form-control mt-3" type="text" placeholder="name" name="name" value={data.name} onChange={handleChange} />
-            <input className="form-control mt-3" type="text" placeholder="stock" name="stock" value={data.stock} onChange={handleChange} />
-            <input className="form-control mt-3" type="text" placeholder="price" name="price" value={data.price} onChange={handleChange} />
-            <input className="form-control mt-3 p-1" type="file" placeholder="photo" name="photo" value={data.photo} onChange={handleUpload} />
-            <input className="form-control mt-3" type="text" placeholder="description" name="description" value={data.description} onChange={handleChange} />
+            <input className="form-control mt-3" type="text" placeholder="name" name="name" id={id} value={data.name} onChange={handleChange} />
+            <input className="form-control mt-3" type="text" placeholder="stock" name="stock" id={id} value={data.stock} onChange={handleChange} />
+            <input className="form-control mt-3" type="text" placeholder="price" name="price" id={id} value={data.price} onChange={handleChange} />
+            <input className="form-control mt-3 p-1" type="file" placeholder="photo" name="photo" id={id} value={data.photo} onChange={handleUpload} />
+            <input className="form-control mt-3" type="text" placeholder="description" name="description" id={id} value={data.description} onChange={handleChange} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleClose}>

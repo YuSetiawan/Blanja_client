@@ -1,14 +1,14 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
 import ItemOrder from '../components/order/ItemOrder';
 import MakeOrder from '../components/order/MakeOrder';
+import NavbarLogin from '../components/navbar/NavbarLogin';
 
 const Order = () => {
   return (
     <>
       <>
         <header>
-          <Navbar />
+          <NavbarLogin />
         </header>
         <main>
           <section className="mt-5">

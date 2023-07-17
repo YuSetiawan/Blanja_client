@@ -42,9 +42,7 @@ const Category = () => {
                       </div>
                       <div className="col-md-3 col-6 mb-5">
                         <div>
-                          <a href="/pages/detail.html">
-                            <img className="category" src={shoes} alt="shorts" />
-                          </a>
+                          <img className="category" src={shoes} alt="shorts" />
                         </div>
                       </div>
                     </div>
@@ -68,9 +66,7 @@ const Category = () => {
                       </div>
                       <div className="col-md-3 col-6 mb-5">
                         <div>
-                          <a href="/pages/detail.html">
-                            <img className="category" src={handbag} alt="shorts" />
-                          </a>
+                          <img className="category" src={handbag} alt="shorts" />
                         </div>
                       </div>
                     </div>

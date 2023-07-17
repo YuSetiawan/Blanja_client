@@ -1,6 +1,9 @@
 import React from 'react';
+import '../../assets/css/checkBox.css';
+import {useNavigate} from 'react-router-dom';
 
 const CheckOut = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="col-md-4 mb-3">
@@ -11,9 +14,9 @@ const CheckOut = () => {
               <p className="card-text text-secondary">Total Price</p>
               <h5 className="card-title">Rp 400.000</h5>
             </div>
-            <a href="checkOut.html">
-              <button className="btn btn-danger rounded-pill mt-2 w-100">Buy</button>
-            </a>
+            <button className="btn btn-danger rounded-pill mt-2 w-100" onClick={() => navigate('/order')}>
+              Buy
+            </button>
           </div>
         </div>
       </div>

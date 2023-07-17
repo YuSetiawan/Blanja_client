@@ -1,33 +1,18 @@
-import axios from 'axios';
 import {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {useDispatch} from 'react-redux';
+import deleteProductAction from '../../config/redux/actions/deleteProductAction';
 
 function DeleteProduct(id) {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    axios
-      .delete(`http://localhost:4000/products/${id}`, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => {
-        console.log();
-        alert('Product Deleted');
-        setShow(false);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-        setShow(false);
-      });
+    dispatch(deleteProductAction(id, setShow));
   };
 
   return (

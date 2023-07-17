@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import swal from 'sweetalert';
 
 const CustLogin = () => {
   const navigate = useNavigate();
@@ -9,7 +10,6 @@ const CustLogin = () => {
     password: '',
   });
 
-  let [token, setToken] = useState('');
   const onChange = (e) => {
     setData({
       ...data,
@@ -19,14 +19,21 @@ const CustLogin = () => {
   };
 
   let onClick = (e) => {
+    e.preventDefault();
     axios
       .post('http://localhost:4000/user/login', data)
       .then((res) => {
-        alert('Login succes');
+        swal({
+          title: 'Login Succesful',
+          text: 'Now you can surf the website!',
+          icon: 'success',
+          button: 'Happy shopping!',
+        });
         localStorage.setItem('token', res.data.data.token);
+        navigate('/home');
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         alert('Login Failed');
       });
   };
@@ -35,10 +42,10 @@ const CustLogin = () => {
       <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
         <form>
           <div className="form-group">
-            <input name="" className="form-control" placeholder="Email" type="email" onChange={onChange} />
+            <input name="email" value={data.email} className="form-control" placeholder="Email" type="email" onChange={onChange} />
           </div>
           <div className="form-group">
-            <input className="form-control" placeholder="Password" type="password" onChange={onChange} />
+            <input name="password" value={data.password} className="form-control" placeholder="Password" type="password" onChange={onChange} />
           </div>
           <div className="form-group mb-0">
             <p className="float-right py-3 text-danger mb-0" href="#">
