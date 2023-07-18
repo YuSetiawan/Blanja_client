@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import {useDispatch} from 'react-redux';
 import updateProductAction from '../../config/redux/actions/updateProductAction';
 
-function UpdateProduct(id, name, stock, price, description) {
+function UpdateProduct({id, name, stock, price, description}) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

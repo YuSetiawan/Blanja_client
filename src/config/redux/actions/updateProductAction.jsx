@@ -17,6 +17,9 @@ const updateProductAction = (data, id, photo, setShow) => async (dispatch) => {
     setShow(false);
     const result = products.data.data;
     dispatch({type: 'UPDATE_PRODUCT', payload: result});
+    setTimeout(function () {
+      window.location.reload(1);
+    }, 1500);
   } catch (err) {
     console.error(err.message);
     alert('update product failed');
