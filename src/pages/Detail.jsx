@@ -13,15 +13,17 @@ import rateStar from '../assets/img/rateStar.png';
 import singleStar from '../assets/img/singleStar.png';
 import ProductCard from '../components/home/ProductCard';
 import NavbarLogin from '../components/navbar/NavbarLogin';
+import Swal from 'sweetalert2';
 
 const Detail = () => {
   const isLogin = localStorage.getItem('token');
   const {id} = useParams();
+  const idUser = localStorage.getItem('id');
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/products/${id}`)
+      .get(`https://stormy-moth-tuxedo.cyclic.app/products/${id}`)
       .then((res) => {
         setProduct(res.data.data[0]);
         console.log(product);
@@ -30,6 +32,55 @@ const Detail = () => {
         console.log(err);
       });
   }, []);
+
+  const [data, setData] = useState({
+    id_product: id,
+    size: '',
+    quantity_order: '',
+    id_user: idUser,
+  });
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+    console.log(data);
+  };
+
+  const handleCreateOrder = (e) => {
+    try {
+      e.preventDefault();
+      axios.post(`https://stormy-moth-tuxedo.cyclic.app/order/`, data);
+      Swal.fire({
+        title: 'Order created',
+        showConfirmButton: false,
+        icon: 'success',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
+      });
+    } catch (error) {
+      Swal.fire({
+        title: 'Failed to order',
+        showConfirmButton: false,
+        icon: 'error',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
+      });
+    }
+  };
   if (!isLogin) {
     return (
       <>
@@ -76,7 +127,12 @@ const Detail = () => {
                 <img className="align-top" src={stars} alt="" style={{margin: 0}} />
                 <div className="price mt-3">
                   <p className="text-secondary">Price</p>
-                  <h1>Rp. {product.price}</h1>
+                  <h1>
+                    {new Intl.NumberFormat('Rp', {
+                      style: 'currency',
+                      currency: 'idr',
+                    }).format(product.price)}
+                  </h1>
                 </div>
                 <div className="Color mt-4">
                   <h5>Color</h5>
@@ -94,7 +150,7 @@ const Detail = () => {
                       <button className="rounded-circle btn btn-secondary ml-3" style={{border: 'none'}} alt="">
                         <img className="pb-1" src={minus} alt="" />
                       </button>
-                      <p className="ml-3 mr-3">28</p>
+                      <p className="ml-3 mr-3">2</p>
                       <button className="rounded-circle btn btn-light" style={{border: 'none', boxShadow: 'black 20px'}} alt="">
                         <img src={plus} alt="" />
                       </button>
@@ -154,7 +210,7 @@ const Detail = () => {
                     /5
                   </h5>
                 </div>
-                <img src={rateStar} style={{marginLeft: '-15px'}} />
+                <img src={rateStar} alt="star" style={{marginLeft: '-15px'}} />
               </div>
               <div className="col-md-4 col-8 mt-3 ml-sm-5" style={{marginLeft: '-25px'}}>
                 <div className="form-inline mb-1 mt-3" style={{display: 'flex', alignItems: 'center'}}>
@@ -258,40 +314,95 @@ const Detail = () => {
                 <img className="align-top" src={stars} alt="" style={{margin: 0}} />
                 <div className="price mt-3">
                   <p className="text-secondary">Price</p>
-                  <h1>Rp. {product.price}</h1>
-                </div>
-                <div className="Color mt-4">
-                  <h5>Color</h5>
-                  <div className="row col-7">
-                    <img className="col-sm-3 col-4" alt="..." src={color1} />
-                    <img className="col-sm-3 col-4" alt="..." src={color2} />
-                    <img className="col-sm-3 col-4" alt="..." src={color3} />
-                    <img className="col-sm-3 col-1" alt="..." src={color4} />
-                  </div>
+                  <h1>
+                    {' '}
+                    {new Intl.NumberFormat('Rp', {
+                      style: 'currency',
+                      currency: 'idr',
+                    }).format(product.price)}
+                  </h1>
                 </div>
                 <div className="custom-order row ml-1 mt-3">
-                  <div className="Size mt-3">
-                    <h5>Size</h5>
-                    <div className="row mt-3">
-                      <button className="rounded-circle btn btn-secondary ml-3" style={{border: 'none'}} alt="">
-                        <img className="pb-1" src={minus} alt="" />
-                      </button>
-                      <p className="ml-3 mr-3">28</p>
-                      <button className="rounded-circle btn btn-light" style={{border: 'none', boxShadow: 'black 20px'}} alt="">
-                        <img src={plus} alt="" />
-                      </button>
+                  <div className="Size ml-2 mt-3">
+                    <div>
+                      <h5>Quantity</h5>
+                      <div className="color-groups row mt-3">
+                        <div
+                          className="color color-white text-center"
+                          style={{
+                            fontSize: 20,
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            backgroundColor: '#D4D4D4',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                          onClick={() => {
+                            setData({
+                              ...data,
+                              quantity_order: Math.max(1, data.quantity_order - 1),
+                            });
+                          }}
+                        >
+                          -
+                        </div>
+
+                        <input
+                          type="text"
+                          className="color color text-center"
+                          style={{
+                            borderColor: 'transparent',
+                            width: '70px',
+                          }}
+                          placeholder="1"
+                          name="quantity_order"
+                          value={data.quantity_order}
+                          onChange={handleChange}
+                        />
+
+                        <div
+                          className="color color-white text-center"
+                          style={{
+                            fontSize: 20,
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            backgroundColor: '#D4D4D4',
+                            boxShadow: '0px 0px 4px rgba(142, 142, 142, 0.25)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'black',
+                          }}
+                          onClick={() => {
+                            setData({
+                              ...data,
+                              quantity_order: data.quantity_order + 1,
+                            });
+                          }}
+                        >
+                          +
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="Size ml-5 mt-3">
-                    <h5>Quantity</h5>
+                  <div className="Size mt-3 ml-5">
+                    <h5>Size</h5>
                     <div className="row mt-3">
-                      <button className="rounded-circle btn btn-secondary ml-3" style={{border: 'none'}} alt="">
-                        <img className="pb-1" src={minus} alt="" />
-                      </button>
-                      <p className="ml-3 mr-3">1</p>
-                      <button className="rounded-circle btn btn-light" style={{border: 'none', boxShadow: 'black 20px'}} alt="">
-                        <img src={plus} alt="" />
-                      </button>
+                      <input
+                        type="text"
+                        className="color color text-center"
+                        style={{
+                          borderColor: 'transparent',
+                          width: '70px',
+                        }}
+                        placeholder="XL / EU 43"
+                        name="size"
+                        value={data.size}
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                 </div>
@@ -304,8 +415,8 @@ const Detail = () => {
                   </button>
                 </div>
                 <div className="Buy-button mt-3">
-                  <button onClick={() => navigate('/')} className="col-md-9 col-11 btn btn-danger rounded-pill mt-2 w-100">
-                    Buy Now
+                  <button onClick={handleCreateOrder} className="col-md-9 col-11 btn btn-danger rounded-pill mt-2 w-100">
+                    Buy
                   </button>
                 </div>
               </div>
@@ -336,7 +447,7 @@ const Detail = () => {
                     /5
                   </h5>
                 </div>
-                <img src={rateStar} style={{marginLeft: '-15px'}} />
+                <img src={rateStar} alt="star" style={{marginLeft: '-15px'}} />
               </div>
               <div className="col-md-4 col-8 mt-3 ml-sm-5" style={{marginLeft: '-25px'}}>
                 <div className="form-inline mb-1 mt-3" style={{display: 'flex', alignItems: 'center'}}>

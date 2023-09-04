@@ -10,7 +10,7 @@ function CreateProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   let [data, setData] = useState({
-    nama: '',
+    name: '',
     stock: '',
     price: '',
     description: '',
@@ -37,7 +37,7 @@ function CreateProduct() {
 
   return (
     <>
-      <Button variant="danger" onClick={handleShow} className="mt-3">
+      <Button variant="danger" onClick={handleShow} className="mt-3 w-50 rounded-pill">
         Create Product{' '}
       </Button>
 
@@ -51,7 +51,7 @@ function CreateProduct() {
             <input className="form-control mt-3" type="text" placeholder="stock" name="stock" value={data.stock} onChange={handleChange} />
             <input className="form-control mt-3" type="text" placeholder="price" name="price" value={data.price} onChange={handleChange} />
             <input className="form-control mt-3 p-1" type="file" placeholder="photo" name="photo" value={data.photo} onChange={handleUpload} />
-            <input className="form-control mt-3" type="text" placeholder="description" name="description" value={data.description} onChange={handleChange} />
+            <textarea className="form-control mt-3" type="text" placeholder="description" name="description" value={data.description} onChange={handleChange} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleClose}>

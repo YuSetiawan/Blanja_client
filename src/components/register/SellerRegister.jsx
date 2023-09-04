@@ -1,47 +1,124 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const SellerRegister = () => {
+const CustRegister = () => {
   const navigate = useNavigate();
+  const [confirmPassword, setConfirmPasword] = useState('');
+  const [isError, setIsError] = useState('');
+  const [data, setData] = useState({
+    fullname: '',
+    email: '',
+    password: '',
+    phone: '',
+    store_name: '',
+    role: 'seller',
+  });
 
+  const checkValidation = (e) => {
+    const confirm = e.target.value;
+    setConfirmPasword(confirm);
+    const cek = data.password;
+    if (cek !== confirm) {
+      setIsError('Password not match!');
+    } else {
+      setIsError('');
+    }
+  };
+
+  const onChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+    console.log(data);
+  };
+
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    const cek = data.password;
+
+    if (cek !== confirmPassword) {
+      return;
+    }
+    axios
+      .post('https://stormy-moth-tuxedo.cyclic.app/users/registerSeller', data)
+      .then((res) => {
+        Swal.fire({
+          title: 'Account created',
+          showConfirmButton: false,
+          icon: 'success',
+          target: '#custom-target',
+          timer: 2000,
+          timerProgressBar: true,
+          customClass: {
+            container: 'position-absolute',
+          },
+          toast: true,
+          position: 'bottom-right',
+        });
+        navigate('/login');
+      })
+      .catch((err) => {
+        console.log(err.response);
+        Swal.fire({
+          title: 'Account failed to create',
+          showConfirmButton: false,
+          icon: 'error',
+          target: '#custom-target',
+          timer: 2000,
+          timerProgressBar: true,
+          customClass: {
+            container: 'position-absolute',
+          },
+          toast: true,
+          position: 'bottom-right',
+        });
+      });
+  };
   return (
     <>
-      <div className="tab-pane fade" id="pills-regisSeller" role="tabpanel" aria-labelledby="pills-profile-tab">
-        <form>
+      <div className="tab-pane fade " id="pills-regisSeller" role="tabpanel" aria-labelledby="pills-home-tab">
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <input name="" className="form-control" placeholder="Name" type="text" />
+            <input name="fullname" className="form-control" placeholder="Full name" type="text" onChange={onChange} />
           </div>
           <div className="form-group">
-            <input name="" className="form-control" placeholder="Email" type="email" />
+            <input name="email" className="form-control" placeholder="email" type="email" onChange={onChange} />
           </div>
           <div className="form-group">
-            <input name="" className="form-control" placeholder="Phone number" type="text" />
+            <input name="password" className="form-control" placeholder="password" type="password" onChange={onChange} />
           </div>
           <div className="form-group">
-            <input name="" className="form-control" placeholder="Store name" type="text" />
+            <input name="Confirm password" className="form-control" placeholder="Confirm password" type="password" onChange={(e) => checkValidation(e)} />
+            <p className="text-danger">{isError}</p>
           </div>
           <div className="form-group">
-            <input className="form-control" placeholder="Password" type="password" />
+            <input name="phone" className="form-control" placeholder="phone" type="text" onChange={onChange} />
+          </div>
+          <div className="form-group">
+            <input name="store_name" className="form-control" placeholder="Store description" type="text" onChange={onChange} />
           </div>
           <div className="form-group">
             <p className="float-right py-3 text-danger mb-0" href="#">
               Forgot password?
             </p>{' '}
-            <button onClick={() => navigate('/home')} className="btn btn-danger btn-block rounded-pill">
+            <button type="submit" className="btn btn-danger btn-block rounded-pill">
               SIGN UP
             </button>
           </div>
+          <p className="text-regis">
+            Already have blanja account?
+            <span onClick={() => navigate('/login')} className="text-danger">
+              {' '}
+              Login
+            </span>{' '}
+          </p>
         </form>
-        <p className="text-regis">
-          Already have blanja account?
-          <span onClick={() => navigate('/login')} className="text-danger">
-            {' '}
-            Login
-          </span>
-        </p>
       </div>
     </>
   );
 };
 
-export default SellerRegister;
+export default CustRegister;

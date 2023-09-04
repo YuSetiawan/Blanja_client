@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Logo from '../../assets/icon/logo.png';
 import Search from '../../assets/icon/Search Glyph.png';
 import Filter from '../../assets/icon/filter.svg';
@@ -7,9 +7,42 @@ import Bell from '../../assets/icon/bell.png';
 import Mail from '../../assets/icon/mail.png';
 import Profile from '../../assets/img/Profile.png';
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const NavbarLogin = () => {
   const navigate = useNavigate();
+  const isSeller = localStorage.getItem('role');
+  const idUser = localStorage.getItem('id');
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://stormy-moth-tuxedo.cyclic.app/users/${idUser}`)
+      .then((res) => {
+        setUser(res.data.data[0]);
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const logOut = () => {
+    localStorage.clear();
+    Swal.fire({
+      title: 'Account already logout',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
+    });
+  };
 
   return (
     <>
@@ -35,10 +68,16 @@ const NavbarLogin = () => {
               </a>
               <img className="p-3 m-0" src={Bell} alt="bell" />
               <img className="p-3 m-0" src={Mail} alt="mail" />
-              <a onClick={() => navigate('/profile/seller')}>
-                <img className="p-3 m-0" src={Profile} alt="profile" />
-              </a>
-              <button className="btn btn-danger rounded-pill" onClick={(e) => localStorage.removeItem('token')}>
+              {isSeller == 'seller' ? (
+                <a onClick={() => navigate('/profile/seller')}>
+                  {!user.photo ? <img className="p-3 m-0" src={Profile} alt="profile" /> : <img className="mr-2" src={user.photo} height={32} width={32} style={{borderRadius: '50%'}} alt="profile" />}
+                </a>
+              ) : (
+                <a onClick={() => navigate('/profile')}>
+                  {!user.photo ? <img className="p-3 m-0" src={Profile} alt="profile" /> : <img className="mr-2" src={user.photo} height={32} width={32} style={{borderRadius: '50%'}} alt="profile" />}{' '}
+                </a>
+              )}
+              <button className="btn btn-danger rounded-pill" onClick={logOut}>
                 Log Out
               </button>
             </form>

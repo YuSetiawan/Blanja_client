@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 const updateProductAction = (data, id, photo, setShow) => async (dispatch) => {
   try {
     const formData = new FormData();
@@ -7,13 +8,25 @@ const updateProductAction = (data, id, photo, setShow) => async (dispatch) => {
     formData.append('price', data.price);
     formData.append('photo', photo);
     formData.append('description', data.description);
-    const products = await axios.put(`http://localhost:4000/products/${id}`, formData, {
+    const products = await axios.put(`https://stormy-moth-tuxedo.cyclic.app/products/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
     console.log(products);
-    alert('update product successful');
+    Swal.fire({
+      title: 'Product updated',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
+    });
     setShow(false);
     const result = products.data.data;
     dispatch({type: 'UPDATE_PRODUCT', payload: result});
@@ -22,7 +35,19 @@ const updateProductAction = (data, id, photo, setShow) => async (dispatch) => {
     }, 1500);
   } catch (err) {
     console.error(err.message);
-    alert('update product failed');
+    Swal.fire({
+      title: 'Product failed to updated',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
+    });
     setShow(false);
   }
 };

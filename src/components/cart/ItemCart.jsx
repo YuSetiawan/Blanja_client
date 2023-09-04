@@ -1,9 +1,21 @@
-import React from 'react';
-import Suit from '../../assets/img/jazz-order.png';
-import Jacket from '../../assets/img/Zara-Jacket.png';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import PlusMinus from '../../assets/img/plusbag.png';
 
 const ItemCart = () => {
+  const idUser = localStorage.getItem('id');
+  const [order, setOrder] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://stormy-moth-tuxedo.cyclic.app/order/${idUser}`)
+      .then((res) => {
+        setOrder(res.data.data);
+        console.log(order);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <div className="col-sm-8">
@@ -13,45 +25,35 @@ const ItemCart = () => {
               <input type="checkbox" defaultChecked="checked" />
               <span className="checkmark" />
             </label>
-            <h5 className="card-title col-md-9 col-7">
-              Select all items
-              <span className="text-secondary"> (2 items selected) </span>
-            </h5>
-            <p className="card-text text-danger col-md-2 col-3">Delete</p>
+            <h5 className="card-title col-md-9 col-7">Select items</h5>
           </div>
         </div>
         {/* Item cart 1*/}
-        <div className="card pl-3 mb-3">
-          <div className="card-body row d-flex align-items-center">
-            <label className="container-check col-md-1 col-2">
-              <input type="checkbox" defaultChecked="checked" />
-              <span className="checkmark" />
-            </label>
-            <img className="rounded col-md-2 col-3" src={Suit} alt="Clothes" />
-            <div className="col-md-4 col-6 mb-2">
-              <h5 className="card-title">Men's formal suit - Black</h5>
-              <p className="card-text text-secondary">Zalora Cloth</p>
+        {order.map((item) => (
+          <div className="card pl-3 mb-3">
+            <div className="card-body row d-flex align-items-center">
+              <label className="container-check col-md-1 col-2">
+                <input type="checkbox" defaultChecked="checked" />
+                <span className="checkmark" />
+              </label>
+              <img className="rounded col-md-2 col-3" src={item.photo} alt="Clothes" />
+              <div className="col-md-4 col-6 mb-2">
+                <h5 className="card-title">{item.name}</h5>
+                <p className="card-text text-secondary">
+                  Size: {item.size}, Quantity: {item.quantity_order}
+                </p>
+              </div>
+              <img className="rounded col-md-2 col-5" src={PlusMinus} alt="Clothes" />
+              <h5 className="card-title col-md-3 col-6">
+                {' '}
+                {new Intl.NumberFormat('Rp', {
+                  style: 'currency',
+                  currency: 'idr',
+                }).format(item.price)}
+              </h5>
             </div>
-            <img className="rounded col-md-2 col-5" src={PlusMinus} alt="Clothes" />
-            <h5 className="card-title col-md-3 col-6">Rp 200.000</h5>
           </div>
-        </div>
-        {/* Item cart 2  */}
-        <div className="card pl-3 mb-3">
-          <div className="card-body row d-flex align-items-center">
-            <label className="container-check col-md-1 col-2">
-              <input type="checkbox" defaultChecked="checked" />
-              <span className="checkmark" />
-            </label>
-            <img className="rounded col-md-2 col-3" src={Jacket} alt="Clothes" />
-            <div className="col-md-4 col-6 mb-2">
-              <h5 className="card-title">Men's Jacket jeans</h5>
-              <p className="card-text text-secondary">Zalora Cloth</p>
-            </div>
-            <img className="rounded col-md-2 col-5" src={PlusMinus} alt="Clothes" />
-            <h5 className="card-title col-md-3 col-6">Rp 200.000</h5>
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );

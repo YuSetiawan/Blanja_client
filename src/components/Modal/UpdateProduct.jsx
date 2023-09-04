@@ -50,7 +50,7 @@ function UpdateProduct({id, name, stock, price, description}) {
             <input className="form-control mt-3" type="text" placeholder="stock" name="stock" id={id} value={data.stock} onChange={handleChange} />
             <input className="form-control mt-3" type="text" placeholder="price" name="price" id={id} value={data.price} onChange={handleChange} />
             <input className="form-control mt-3 p-1" type="file" placeholder="photo" name="photo" id={id} value={data.photo} onChange={handleUpload} />
-            <input className="form-control mt-3" type="text" placeholder="description" name="description" id={id} value={data.description} onChange={handleChange} />
+            <textarea className="form-control mt-3" type="text" placeholder="description" name="description" id={id} value={data.description} onChange={handleChange} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleClose}>

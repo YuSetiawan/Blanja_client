@@ -14,14 +14,14 @@ const Register = () => {
         <img src={Logo} alt="logo" onClick={() => navigate('/')} />
         <p className="text-center py-3">Please login with your account</p>
         {/* Button role */}
-        <ul className="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-          <li className="nav-item border border-secondary rounded" role="presentation">
-            <button className="nav-link btn-danger active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+        <ul className="nav nav-pills mb-3 justify-content-center text-dark" id="pills-tab" role="tablist">
+          <li className="nav-item" role="presentation">
+            <button className="nav-link btn-danger active text-dark" id="pills-home-tab" data-toggle="pill" data-target="#pills-regisCust" type="button" role="tab" aria-controls="pills-regisCust" aria-selected="true">
               Customer
             </button>
           </li>
-          <li className="nav-item border border-secondary rounded" role="presentation">
-            <button className="nav-link btn-danger" id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+          <li className="nav-item " role="presentation">
+            <button className="nav-link btn-danger text-dark" id="pills-profile-tab" data-toggle="pill" data-target="#pills-regisSeller" type="button" role="tab" aria-controls="pills-regisSeller" aria-selected="false">
               Seller
             </button>
           </li>

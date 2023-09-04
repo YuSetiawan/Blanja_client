@@ -1,6 +1,77 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
+import Swal from 'sweetalert2';
+import DeleteAddress from '../Modal/DeleteAddress';
 
 const CustAddres = () => {
+  const idUser = localStorage.getItem('id');
+  const [address, setAddress] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://stormy-moth-tuxedo.cyclic.app/shipping/${idUser}`)
+      .then((res) => {
+        setAddress(res.data.data);
+        console.log(address);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const [data, setData] = useState({
+    name: '',
+    users_id: idUser,
+    address_as: '',
+    address: '',
+    phone: '',
+    postal_code: '',
+    city: '',
+  });
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+    console.log(data);
+  };
+
+  const handleCreateAddress = (e) => {
+    try {
+      e.preventDefault();
+      axios.post(`https://stormy-moth-tuxedo.cyclic.app/shipping/`, data);
+      Swal.fire({
+        title: 'Address created',
+        showConfirmButton: false,
+        icon: 'success',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
+      });
+      setTimeout(function () {
+        window.location.reload();
+      }, 1500);
+    } catch (error) {
+      Swal.fire({
+        title: 'Failed to create Address',
+        showConfirmButton: false,
+        icon: 'error',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
+      });
+    }
+  };
   return (
     <div className="tab-pane fade" id="list-Shipping" role="tabpanel" aria-labelledby="list-Shipping-list">
       <div className="card ml-3 shadow">
@@ -44,37 +115,37 @@ const CustAddres = () => {
                       </button>
                     </div>
                     <div className="modal-body">
-                      <form>
+                      <form onSubmit={handleCreateAddress}>
                         <div className="form-row">
                           <div className="col-md-12 mb-3">
                             <label htmlFor="validationDefault01">Save address as (ex : home address, office address)</label>
-                            <input type="text" className="form-control" id="validationDefault01" placeholder="Your address" required="" />
+                            <input type="text" className="form-control" id="validationDefault01" placeholder="Your address" onChange={handleChange} name="address_as" required />
                           </div>
                         </div>
                         <div className="form-row">
                           <div className="col-md-6 mb-3">
-                            <label htmlFor="validationDefault01">Recipient’s name</label>
-                            <input type="text" className="form-control" id="validationDefault01" required="" />
+                            <label htmlFor="validationDefault01">Recipient name</label>
+                            <input type="text" className="form-control" id="validationDefault01" onChange={handleChange} name="name" required />
                           </div>
                           <div className="col-md-6 mb-3">
                             <label htmlFor="validationDefault02">Recipient's telephone number</label>
-                            <input type="text" className="form-control" id="validationDefault02" required="" />
+                            <input type="text" className="form-control" id="validationDefault02" onChange={handleChange} name="phone" required />
                           </div>
                         </div>
                         <div className="form-row">
                           <div className="col-md-6 mb-3">
                             <label htmlFor="validationDefault01">Postal code</label>
-                            <input type="text" className="form-control" id="validationDefault01" required="" />
+                            <input type="text" className="form-control" id="validationDefault01" onChange={handleChange} name="postal_code" required />
                           </div>
                           <div className="col-md-6 mb-3">
-                            <label htmlFor="validationDefault02">Postal code</label>
-                            <input type="text" className="form-control" id="validationDefault02" required="" />
+                            <label htmlFor="validationDefault02">City or Subdistrict</label>
+                            <input type="text" className="form-control" id="validationDefault02" onChange={handleChange} name="city" required />
                           </div>
                         </div>
                         <div className="form-row">
-                          <div className="col-md-6 mb-3">
-                            <label htmlFor="validationDefault03">City or Subdistrict</label>
-                            <input type="text" className="form-control" id="validationDefault03" required="" />
+                          <div className="col-md-12 mb-3">
+                            <label htmlFor="validationDefault03">Your Address</label>
+                            <input type="text" className="form-control" id="validationDefault03" onChange={handleChange} name="address" required />
                           </div>
                         </div>
                         <div className="form-group">
@@ -86,25 +157,38 @@ const CustAddres = () => {
                             </label>
                           </div>
                         </div>
+                        <div className="modal-footer d-flex justify-content-end pb-4">
+                          <button type="button" data-dismiss="modal" aria-label="Close" className="btn btn-outline-secondary rounded-pill mr-2" style={{width: 130}}>
+                            Cancel
+                          </button>
+                          <button type="submit" className="btn btn-danger rounded-pill" style={{width: 130}}>
+                            Save
+                          </button>
+                        </div>
                       </form>
-                    </div>
-                    <div className="modal-footer d-flex justify-content-end pb-4">
-                      <button type="button" className="btn btn-outline-secondary rounded-pill mr-2" style={{width: 130}}>
-                        Cancel
-                      </button>
-                      <button type="button" className="btn btn-danger rounded-pill" data-dismiss="modal" style={{width: 130}}>
-                        Save
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
               {/* Modal end */}
-              <div className="card-body col-md-12 border border-danger rounded mt-4 pl-sm-5">
-                <h5 className="card-title">Andreas Jane</h5>
-                <p className="card-text">Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181.</p>
-                <h5 className="text-danger">Change address</h5>
-              </div>
+              {address.map((item, index) => (
+                <div className="card-body form-inline col-md-12 border border-danger rounded mt-4 pl-sm-5">
+                  <>
+                    <div key={index} className="col-9">
+                      <h5 className="card-title">
+                        {item.name}, address as: {item.address_as}{' '}
+                      </h5>
+                      <p className="card-text">
+                        {item.address}, {item.city}. {item.postal_code}
+                      </p>
+                      <p className="card-text">{item.phone}</p>
+                    </div>
+                    <div className="col-3">
+                      <DeleteAddress id={item.id} />
+                    </div>
+                  </>
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 const CustLogin = () => {
   const navigate = useNavigate();
@@ -18,29 +18,50 @@ const CustLogin = () => {
     console.log(data);
   };
 
-  let onClick = (e) => {
+  let handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:4000/user/login', data)
+      .post('https://stormy-moth-tuxedo.cyclic.app/users/login', data)
       .then((res) => {
-        swal({
-          title: 'Login Succesful',
-          text: 'Now you can surf the website!',
+        Swal.fire({
+          title: 'Login Success, you can shop now!',
+          showConfirmButton: false,
           icon: 'success',
-          button: 'Happy shopping!',
+          target: '#custom-target',
+          timer: 2000,
+          timerProgressBar: true,
+          customClass: {
+            container: 'position-absolute',
+          },
+          toast: true,
+          position: 'bottom-right',
         });
         localStorage.setItem('token', res.data.data.token);
+        localStorage.setItem('id', res.data.data.id);
+        localStorage.setItem('role', res.data.data.role);
         navigate('/home');
       })
       .catch((err) => {
         console.log(err);
-        alert('Login Failed');
+        Swal.fire({
+          title: 'Email/Password incorrect',
+          showConfirmButton: false,
+          icon: 'error',
+          target: '#custom-target',
+          timer: 2000,
+          timerProgressBar: true,
+          customClass: {
+            container: 'position-absolute',
+          },
+          toast: true,
+          position: 'bottom-right',
+        });
       });
   };
   return (
     <>
       <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input name="email" value={data.email} className="form-control" placeholder="Email" type="email" onChange={onChange} />
           </div>
@@ -51,7 +72,7 @@ const CustLogin = () => {
             <p className="float-right py-3 text-danger mb-0" href="#">
               Forgot password?
             </p>
-            <button onClick={onClick} className="btn btn-danger btn-block rounded-pill">
+            <button type="submit" className="btn btn-danger btn-block rounded-pill">
               LOGIN
             </button>
           </div>

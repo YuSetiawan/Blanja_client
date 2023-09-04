@@ -12,7 +12,7 @@ import Pagination from '../pagination/pagination';
 const SellerProduct = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(4);
+  const [postsPerPage] = useState(4);
   const {product} = useSelector((state) => state.product);
   const [search, setSearch] = useState('');
   console.log(search);
@@ -53,13 +53,13 @@ const SellerProduct = () => {
           <div className="tab-content" id="pills-tabContent">
             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
               <div className="container pl-4 pr-4">
-                <div className="container nav-item mb-3 form-inline pl-0">
-                  <input id="searchbox" className="form-control mr-sm-2" type="Search Products" placeholder="Search" aria-label="Search" onChange={(e) => setSearch(e.target.value)} />
-                  <img className="searchLogo" src={Search} alt="" />
-                </div>
                 <Card className="mb-4 rounded">
                   <Card.Header className="bg-secondary text-white">Store Product</Card.Header>
                   <Card.Body>
+                    <div className="container nav-item form-inline pl-0">
+                      <input id="searchbox" className="form-control w-100" type="Search Products" placeholder="Search" aria-label="Search" onChange={(e) => setSearch(e.target.value)} />
+                      <img className="searchLogo" src={Search} alt="" />
+                    </div>
                     <CreateProduct />
                     <div className="row d-flex justify-content-around mt-3">
                       {currentPosts
@@ -76,8 +76,12 @@ const SellerProduct = () => {
                                 <div className="card-body" key={product.id}>
                                   <h5 className="card-title">{product.name}</h5>
                                   <p className="card-text">{product.stock} </p>
-                                  <p className="card-text">{product.price} </p>
-                                  <p className="card-text">{product.description} </p>
+                                  <p className="card-text">
+                                    {new Intl.NumberFormat('Rp', {
+                                      style: 'currency',
+                                      currency: 'idr',
+                                    }).format(product.price)}
+                                  </p>
                                   <div className="dropdown">
                                     <button className="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                       Product Settings

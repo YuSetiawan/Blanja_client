@@ -1,20 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import medProfile from '../../assets/img/Medium-profile.png';
 import pen from '../../assets/icon/pen.png';
 import home from '../../assets/icon/home.png';
 import box from '../../assets/icon/package.png';
 import whiteCart from '../../assets/icon/shopping-cart-white.png';
 import '../../assets/css/sideProfile.css';
+import axios from 'axios';
 
 const SidebarSeller = () => {
+  const idUser = localStorage.getItem('id');
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://stormy-moth-tuxedo.cyclic.app/users/${idUser}`)
+      .then((res) => {
+        setUser(res.data.data[0]);
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <div className="col-md-3 col-12 sm-0 pt-5 bg-white">
         <div id="nav-content" className="container ml-4 ">
           <div className="row d-flex align-items-center mb-3">
-            <img className="pb-3 m-4" src={medProfile} alt="" />
+            {!user.photo ? <img className="pb-3 m-4" src={medProfile} alt="" /> : <img className="m-3" height={70} width={70} style={{borderRadius: '50%'}} src={user.photo} alt="" />}
             <div className="pr-5">
-              <h5>Johanes Mikael</h5>
+              <h5>{user.fullname}</h5>
               <div className="form-inline">
                 <img className="pb-3" src={pen} alt="" />
                 <p className="">Change profile</p>
