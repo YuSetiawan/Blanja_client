@@ -1,132 +1,156 @@
-<div align="center">
-<br/>
-<img src="https://i.postimg.cc/52xG205r/blanja.png" width="180px" height="70px" cover />
- </div>
-
-<div align="center">
 <br />
+<p align="center">
+  <div align="center">
+    <img height="150" src="https://cdn.discordapp.com/attachments/1118733891738554480/1146038619325349898/logo-removebg-preview.png" alt="blanja" border="0"/>
+  </div>
+  <h3 align="center">Blanja App</h3>
+  <p align="center">
+    <a href="https://github.com/YuSetiawan/Blanja_client"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://blanja-client-tau.vercel.app/home">View Demo</a>
+    ·
+    <a href="stormy-moth-tuxedo.cyclic.app/">Api Demo</a>
+  </p>
+</p>
 
-[![made by Yusuf Setiawan](https://img.shields.io/badge/made%20by-Yusuf-ff1414.svg?style=flat-square)](https://github.com/YuSetiawan)
+## Table of Contents
 
-</div>
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Setup .env](#setup-env)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [Related Project](#related-project)
+- [Contact](#contact)
 
-# Blanja
+<!-- ABOUT THE PROJECT -->
 
-React Redux Toolkit Web Application with Tailwind CSS
-This README is a guide for a web application built using React JS as the main library, Redux Toolkit as the state management, and Tailwind CSS as the UI framework. This application aims to provide optimal user experience in utilizing the provided features.
+## About The Project
 
-## Screenshot
+Blanja is an E-commerce website project that aims to provide an easy and convenient online shopping experience for users in Indonesia. The site offers a wide range of products, including fashion, beauty, electronics, food and beverages.
+
+To use Blanja's services, users only need to create an account and enter their payment details. After that, users can browse products, add them to their shopping cart, and choose their preferred payment method.
+
+With all the features and security provided, Blanja is expected to provide a safe, easy, and convenient online shopping experience for users across Indonesia.
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+- [NodeJs](https://nodejs.org/en/download/)
+- [Bootstrap](https://getbootstrap.com/)
+- [ReactJS](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+
+### Installation
+
+- Clone This Front End Repo
+
+```
+git clone https://github.com/YuSetiawan/Blanja_client
+```
+
+- Go To Folder Repo
+
+```
+cd Blanja_client
+```
+
+- Install Module
+
+```
+npm install
+```
+
+- <a href="#setup-env">Setup .env</a>
+- Type ` npm run start` To Start Website
+- Type ` npm run production` To Start Production
+
+### Setup .env
+
+Create .env file in your root project folder.
+
+```
+REACT_APP_BACKEND = [BACKEND_URL]
+```
+
+<!-- ROADMAP -->
+
+## Screenshots
 
 <table>
-<tr>
-<td><image src="./Screen Capture/Home.png" alt="Home page" width=100%/></td>
-<td><image src="./Screen Capture/DetailProduct.png" alt="Detail page" width=100%/></td>
-</tr>
-<tr>
-<td align='center'>Home</td>
-<td align='center'>Detail</td>
-</tr>
-<tr>
-<td><image src="./Screen Capture/HomeMobile.png" alt="Home page" width=100%/></td>
-<td><image src="./Screen Capture/DetailProductMobile.png" alt="Detail page" width=100%/></td>
-</tr>
-<tr>
-<td align='center'>Home - Mobile Display</td>
-<td align='center'>Detail - Mobile Display</td>
-</tr>
+ <tr>
+    <td><img width="350px" src="/Screen Capture/regis user.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="/Screen Capture/regis.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Register as Customer</td>
+    <td>Register as Seller</td>
+  </tr>
+
+  <tr>
+    <td><img width="350px" src="/Screen Capture/login.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="/Screen Capture/profile data.png"  border="0" border="0" alt="4" /></td>
+
+  </tr>
+   <tr>
+    <td>Login</td>
+    <td>Profile Account</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="/Screen Capture/React-App.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="/Screen Capture/product detail.png"  border="0" border="0" alt="3" /> </td>
+
+  </tr>
+   <tr>
+    <td>Landing Page</td>
+    <td>Product Detail Page</td>
+  </tr>
+    <tr>
+    <td><img width="350px" src="/Screen Capture/my bag.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="/Screen Capture/check out.png"  border="0" border="0" alt="4" /></td>
+  </tr>
+   <tr>
+    <td>My Bag</td>
+    <td>Checkout</td>
+  </tr>
+  <tr>
+    <td><img width="350px" src="/Screen Capture/addres.png"  border="0" border="0" alt="3" /> </td>
+    <td><img width="350px" src="/Screen Capture/product seller.png"  border="0" border="0" alt="4" /></td>
+  </tr>
+
+  <tr>
+    <td>Select Address</td>
+    <td>Seller Product's</td>
+  </tr>
+
 </table>
+<!-- CONTRIBUTING -->
 
-## Requirements
+## Contributing
 
-Before running this application, make sure that the system used meets the following requirements: the latest version of Node.js, React JS, and Redux Toolkit are installed, and a code editor such as Visual Studio Code is available.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Installation
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Clone the project
+## Related Project
 
-```bash
-  git clone https://github.com/YuSetiawan/Blanja_client.git
-```
+:rocket: [`Backend Blanja`](https://github.com/YuSetiawan/Blanja_server)
 
-Install dependencies
+:rocket: [`Frontend Blanja`](https://github.com/YuSetiawan/Blanja_client)
 
-```bash
-  npm install or yarn install
-```
+:rocket: [`Demo Blanja`](https://blanja-client-tau.vercel.app/home)
 
-Start the client
-
-```bash
-  npm start
-```
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Project Link: [Blanja-client](https://github.com/YuSetiawan/Blanja_client)
