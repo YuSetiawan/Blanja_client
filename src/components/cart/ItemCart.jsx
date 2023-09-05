@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import PlusMinus from '../../assets/img/plusbag.png';
+import DeleteOrder from '../Modal/DeleteOrder';
+import EditOrder from '../Modal/EditOrder';
 
 const ItemCart = () => {
   const idUser = localStorage.getItem('id');
@@ -10,7 +11,7 @@ const ItemCart = () => {
       .get(`https://stormy-moth-tuxedo.cyclic.app/order/${idUser}`)
       .then((res) => {
         setOrder(res.data.data);
-        console.log(order);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -28,7 +29,7 @@ const ItemCart = () => {
             <h5 className="card-title col-md-9 col-7">Select items</h5>
           </div>
         </div>
-        {/* Item cart 1*/}
+        {/* Item cart */}
         {order.map((item) => (
           <div className="card pl-3 mb-3">
             <div className="card-body row d-flex align-items-center">
@@ -40,10 +41,13 @@ const ItemCart = () => {
               <div className="col-md-4 col-6 mb-2">
                 <h5 className="card-title">{item.name}</h5>
                 <p className="card-text text-secondary">
-                  Size: {item.size}, Quantity: {item.quantity_order}
+                  Note: {item.size}, Quantity: {item.quantity_order}
                 </p>
               </div>
-              <img className="rounded col-md-2 col-5" src={PlusMinus} alt="Clothes" />
+              <div className="col-md-2 col-5">
+                <EditOrder id_order={item.id_order} id_product={item.id_product} size={item.size} quantity_order={item.quantity_order} />
+                <DeleteOrder id={item.id_order} />
+              </div>
               <h5 className="card-title col-md-3 col-6">
                 {' '}
                 {new Intl.NumberFormat('Rp', {

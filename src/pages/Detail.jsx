@@ -3,12 +3,6 @@ import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/navbar/Navbar';
 import stars from '../assets/img/stars.png';
-import color1 from '../assets/img/Ellipse.png';
-import color2 from '../assets/img/Ellipse 6.png';
-import color3 from '../assets/img/Ellipse 7.png';
-import color4 from '../assets/img/Ellipse 8.png';
-import minus from '../assets/icon/minus.png';
-import plus from '../assets/icon/plus.png';
 import rateStar from '../assets/img/rateStar.png';
 import singleStar from '../assets/img/singleStar.png';
 import ProductCard from '../components/home/ProductCard';
@@ -46,6 +40,23 @@ const Detail = () => {
       [e.target.name]: e.target.value,
     });
     console.log(data);
+  };
+
+  const needLogin = () => {
+    Swal.fire({
+      title: 'You need to login for order on this site',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 3000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
+    });
+    navigate('/login');
   };
 
   const handleCreateOrder = (e) => {
@@ -134,38 +145,87 @@ const Detail = () => {
                     }).format(product.price)}
                   </h1>
                 </div>
-                <div className="Color mt-4">
-                  <h5>Color</h5>
-                  <div className="row col-7">
-                    <img className="col-sm-3 col-4" alt="..." src={color1} />
-                    <img className="col-sm-3 col-4" alt="..." src={color2} />
-                    <img className="col-sm-3 col-4" alt="..." src={color3} />
-                    <img className="col-sm-3 col-1" alt="..." src={color4} />
-                  </div>
-                </div>
                 <div className="custom-order row ml-1 mt-3">
-                  <div className="Size mt-3">
-                    <h5>Size</h5>
-                    <div className="row mt-3">
-                      <button className="rounded-circle btn btn-secondary ml-3" style={{border: 'none'}} alt="">
-                        <img className="pb-1" src={minus} alt="" />
-                      </button>
-                      <p className="ml-3 mr-3">2</p>
-                      <button className="rounded-circle btn btn-light" style={{border: 'none', boxShadow: 'black 20px'}} alt="">
-                        <img src={plus} alt="" />
-                      </button>
+                  <div className="Size ml-2 mt-3">
+                    <div>
+                      <h5>Quantity</h5>
+                      <div className="color-groups row mt-3">
+                        <div
+                          className="color color-white text-center"
+                          style={{
+                            fontSize: 20,
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            backgroundColor: '#D4D4D4',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                          onClick={() => {
+                            setData({
+                              ...data,
+                              quantity_order: Math.max(1, data.quantity_order - 1),
+                            });
+                          }}
+                        >
+                          -
+                        </div>
+
+                        <input
+                          type="text"
+                          className="color color text-center"
+                          style={{
+                            borderColor: 'transparent',
+                            width: '70px',
+                          }}
+                          placeholder="1"
+                          name="quantity_order"
+                          value={data.quantity_order}
+                          onChange={handleChange}
+                        />
+
+                        <div
+                          className="color color-white text-center"
+                          style={{
+                            fontSize: 20,
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            backgroundColor: '#D4D4D4',
+                            boxShadow: '0px 0px 4px rgba(142, 142, 142, 0.25)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'black',
+                          }}
+                          onClick={() => {
+                            setData({
+                              ...data,
+                              quantity_order: data.quantity_order + 1,
+                            });
+                          }}
+                        >
+                          +
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="Size ml-5 mt-3">
-                    <h5>Quantity</h5>
+                  <div className="Size mt-3 ml-5">
+                    <h5>Variant</h5>
                     <div className="row mt-3">
-                      <button className="rounded-circle btn btn-secondary ml-3" style={{border: 'none'}} alt="">
-                        <img className="pb-1" src={minus} alt="" />
-                      </button>
-                      <p className="ml-3 mr-3">1</p>
-                      <button className="rounded-circle btn btn-light" style={{border: 'none', boxShadow: 'black 20px'}} alt="">
-                        <img src={plus} alt="" />
-                      </button>
+                      <input
+                        type="text"
+                        className="color color text-center"
+                        style={{
+                          borderColor: 'transparent',
+                          width: '90px',
+                        }}
+                        placeholder="XL / EU 43"
+                        name="size"
+                        value={data.size}
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                 </div>
@@ -178,7 +238,7 @@ const Detail = () => {
                   </button>
                 </div>
                 <div className="Buy-button mt-3">
-                  <button onClick={() => navigate('/')} className="col-md-9 col-11 btn btn-danger rounded-pill mt-2 w-100">
+                  <button onClick={needLogin} className="col-md-9 col-11 btn btn-danger rounded-pill mt-2 w-100">
                     Buy Now
                   </button>
                 </div>
@@ -389,14 +449,14 @@ const Detail = () => {
                     </div>
                   </div>
                   <div className="Size mt-3 ml-5">
-                    <h5>Size</h5>
+                    <h5>Variant</h5>
                     <div className="row mt-3">
                       <input
                         type="text"
                         className="color color text-center"
                         style={{
                           borderColor: 'transparent',
-                          width: '70px',
+                          width: '90px',
                         }}
                         placeholder="XL / EU 43"
                         name="size"
@@ -410,7 +470,7 @@ const Detail = () => {
                   <button type="button" className="btn btn-outline-dark rounded-pill col-md-4 col-5">
                     Chat
                   </button>
-                  <button type="button" className="btn btn-outline-dark rounded-pill col-md-4 col-5 ml-3">
+                  <button onClick={handleCreateOrder} type="button" className="btn btn-outline-dark rounded-pill col-md-4 col-5 ml-3">
                     Add bag
                   </button>
                 </div>
